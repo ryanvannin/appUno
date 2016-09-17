@@ -1,21 +1,69 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import StarWidget from './StarWidget';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOnOver: false,
+      qty: props.initialQty,
+      rate: props.initialRate,
+      tempRate: props.initialTempRate,
+    };
+    this.changeRate = this.changeRate.bind(this);
+  }
+
+  changeRate(action, rate) {
+    let isOnOver; 
+    let tempRate;
+
+    switch(action) {
+      case 'change':
+        isOnOver = false;
+        tempRate = rate;
+        break;
+      case 'show':
+        isOnOver = true;
+        tempRate = this.state.rate;
+        break;
+      case 'reset':
+        isOnOver = false;
+        rate = this.state.tempRate;
+        break;
+      default :
+        return;
+    }
+
+    this.setState({
+     isOnOver,
+     rate, 
+     tempRate,
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <StarWidget 
+        changeRate={ this.changeRate } 
+        isOnOver={ this.state.isOnOver }
+        qty={ this.state.qty }  
+        rate={ this.state.rate }
+      />
     );
   }
+}
+
+App.propTypes = {
+  initialQty: React.PropTypes.number,
+  initialRate: React.PropTypes.number,
+  initialTempRate: React.PropTypes.number,
+}
+
+App.defaultProps = {
+  initialQty: 20,
+  initialRate: 10,
+  initialTempRate: 0,
 }
 
 export default App;

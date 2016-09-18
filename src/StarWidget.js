@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Star = (props) => {
   const { changeRate, id, isOnOver, rate } = props; 

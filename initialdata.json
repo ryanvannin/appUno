@@ -1,6 +1,6 @@
-[{
-  "isOnOver": "false",
-  "qty": "20",
-  "rate": "10",
-  "tempRate": "0",
-}]
+{
+  "isOnOver": false,
+  "qty": 20,
+  "rate": 10,
+  "tempRate": 0
+}

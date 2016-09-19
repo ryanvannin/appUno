@@ -4,6 +4,6 @@ import App from './App';
 import './index.css';
 
 render(
-  <App url="https://raw.githubusercontent.com/ryanvannin/appUno/create-react-fetch-test/initialdata.json" pollInterval={2000} />,
+  <App url="https://raw.githubusercontent.com/ryanvannin/appUno/master/initialdata.json" pollInterval={2000} />,
   document.getElementById('root')
 );

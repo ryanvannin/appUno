@@ -32,7 +32,7 @@ class App extends Component {
 
   componentDidMount() {
     this.loadRates();
-    // load defaults only once. If you need a continuos polling, use the line below
+    // load defaults only once. If you need a continuos polling, uncomment the line below
     // setInterval(() => this.loadRates(), this.props.pollInterval);
   }
 

@@ -1,5 +1,9 @@
 .App {
-  
+  /**/
+}
+
+.StarWidget {
+  /**/
 }
 
 .Star-on {
@@ -8,5 +12,6 @@
 
 .Star-hover {
   color: orange;
+  cursor: pointer;
 }
 

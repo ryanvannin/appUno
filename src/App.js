@@ -5,13 +5,35 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOnOver: false,
+    this.state = {   
+      // by fetching unknown elements you'd want to leave an empty array like: data: []
+      isOnOver: props.initialIsOnOver,
       qty: props.initialQty,
       rate: props.initialRate,
-      tempRate: props.initialTempRate,
+      tempRate: props.initialTempRate
     };
     this.changeRate = this.changeRate.bind(this);
+  }
+
+  loadRates() {
+    // url is defined in the root component, otherwise it doesn't work
+    fetch(this.props.url)
+      .then(response => response.json())
+      .then(data => { 
+        this.setState({ 
+          isOnOver: data.isOnOver,
+          qty: data.qty,
+          rate: data.rate,
+          tempRate: data.tempRate
+        }); 
+      })
+      .catch(err => console.error(this.props.url, err.toString()))
+  }
+
+  componentDidMount() {
+    this.loadRates();
+    // load defaults only once. If you need a continuos polling, uncomment the line below
+    // setInterval(() => this.loadRates(), this.props.pollInterval);
   }
 
   changeRate(action, rate) {
@@ -38,7 +60,7 @@ class App extends Component {
     this.setState({
      isOnOver,
      rate, 
-     tempRate,
+     tempRate
     });
   }
 
@@ -55,15 +77,18 @@ class App extends Component {
 }
 
 App.propTypes = {
+  initialIsOnOver: React.PropTypes.bool,
   initialQty: React.PropTypes.number,
   initialRate: React.PropTypes.number,
-  initialTempRate: React.PropTypes.number,
+  initialTempRate: React.PropTypes.number
 }
 
+// if fetching doesn't work...
 App.defaultProps = {
-  initialQty: 20,
-  initialRate: 10,
-  initialTempRate: 0,
+  initialIsOnOver: false,
+  initialQty: 2,
+  initialRate: 1,
+  initialTempRate: 0
 }
 
 export default App;
